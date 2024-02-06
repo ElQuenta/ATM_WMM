@@ -7,7 +7,7 @@ import java.util.Set;
 public class Main {
     static Scanner scan = new Scanner(System.in);
     static int saldo = 1000;
-    static Set<Integer> pins = new HashSet<Integer>();
+    static Set<Integer> pins = new HashSet<>();
 
 
     public static void main(String[] args) {
@@ -17,10 +17,11 @@ public class Main {
 
     private static void inicioDeSesion(){
         int intentos = 1;
-        while (true) {
+        boolean inisioSesion = false;
+        while (!inisioSesion) {
             System.out.println("Ingrese el pin");
             if (pins.contains(scan.nextInt())) {
-                menu();
+                inisioSesion=true;
                 System.out.println("Gracias por tu preferencia");
             } else if(intentos<3){
                 System.out.println("Intente de nuevo");
@@ -35,6 +36,7 @@ public class Main {
                 }
             }
         }
+        menu();
     }
 
     private static void menu() {
@@ -45,24 +47,26 @@ public class Main {
             switch (opcion) {
                 case 1: // Ver Saldo
                     System.out.println("usted tiene " + saldo);
-                    inicioDeSesion();
+                    opcion = 4;
                     break;
                 case 2: // Depositar Saldo
                     System.out.println("Que monto desea Ingresar");
                     depositarSaldo(scan.nextInt());
+                    opcion = 4;
                     break;
                 case 3: // Retirar Saldo
                     System.out.println("Que monto desea Ingresar");
                     retirarSaldo();
+                    opcion = 4;
                     break;
             }
         }
+        inicioDeSesion();
     }
 
     private static void depositarSaldo(int monto) {
         saldo += monto;
         System.out.println("Se ha ingresado " + monto);
-        inicioDeSesion();
     }
 
     private static void retirarSaldo() {
@@ -71,32 +75,33 @@ public class Main {
         while (opcion != 7) {
             System.out.println("Seleccione un monto a retirar\n1.- 10\n2.- 20\n3.- 50\n4.- 100\n5.- 200\n6.- 500\n7.- cancelar retiro");
             opcion = scan.nextInt();
-            switch (opcion) {
-                case 1://
+            opcion = switch (opcion) {
+                case 1 -> {//
                     monto = 10;
-                    opcion = 7;
-                    break;
-                case 2: //
+                    yield 7;
+                }
+                case 2 -> { //
                     monto = 20;
-                    opcion = 7;
-                    break;
-                case 3: //
+                    yield 7;
+                }
+                case 3 -> { //
                     monto = 50;
-                    opcion = 7;
-                    break;
-                case 4: //
+                    yield 7;
+                }
+                case 4 -> { //
                     monto = 100;
-                    opcion = 7;
-                    break;
-                case 5: //
+                    yield 7;
+                }
+                case 5 -> { //
                     monto = 200;
-                    opcion = 7;
-                    break;
-                case 6: //
+                    yield 7;
+                }
+                case 6 -> { //
                     monto = 500;
-                    opcion = 7;
-                    break;
-            }
+                    yield 7;
+                }
+                default -> opcion;
+            };
             if (monto>0 && saldo - monto >=0){
                 saldo-=monto;
                 System.out.println("Retiro Exitoso");
@@ -104,7 +109,6 @@ public class Main {
                 System.out.println("Saldo insuficiente");
             }
         }
-        inicioDeSesion();
     }
 
 }
