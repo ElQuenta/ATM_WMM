@@ -49,37 +49,36 @@ public class ATM {
         while (opcion != 8) {
             System.out.println("Seleccione un monto a retirar\n1.- 10\n2.- 20\n3.- 50\n4.- 100\n5.- 200\n6.- 500\n7.- ingresar monto\n8.- cancelar retiro");
             opcion = scan.nextInt();
-            opcion = switch (opcion) {
+            switch (opcion) {
                 case 1 -> {//
                     sacarDinero(10, usuario);
-                    yield 8;
+                    opcion = 8;
                 }
                 case 2 -> { //
                     sacarDinero(20, usuario);
-                    yield 8;
+                    opcion = 8;
                 }
                 case 3 -> { //
                     sacarDinero(50, usuario);
-                    yield 8;
+                    opcion = 8;
                 }
                 case 4 -> { //
                     sacarDinero(100, usuario);
-                    yield 8;
+                    opcion = 8;
                 }
                 case 5 -> { //
                     sacarDinero(200, usuario);
-                    yield 8;
+                    opcion = 8;
                 }
                 case 6 -> { //
                     sacarDinero(500, usuario);
-                    yield 8;
+                    opcion = 8;
                 }
                 case 7 -> {
                     System.out.println("Igrese el monto a retirar");
                     sacarDinero(scan.nextInt(),usuario);
-                    yield 8;
+                    opcion = 8;
                 }
-                default -> 8;
             };
         }
     }
