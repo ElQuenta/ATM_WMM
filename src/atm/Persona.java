@@ -1,3 +1,4 @@
+package atm;
 public class Persona {
     private int saldo;
     private final int pin;
